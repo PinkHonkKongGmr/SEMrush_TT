@@ -28,15 +28,15 @@ Array.prototype.inArray = function(el) {
 // console.log([1, 2, 3].inArray(1));
 
 function bind(method, context) {
-  var args = Array.prototype.slice.call(arguments, 2);
+  var args = [].slice.call(arguments, 2);
 
   return function() {
-    var a = args.concat(Array.prototype.slice.call(arguments, 0));
+    var a = args.concat([].slice.call(arguments, 0));
     return method.apply(context, a);
   }
 }
 
-function test(arr) {
+function test() {
   this.forEach(function (elem) {
     console.log(elem);
   })
