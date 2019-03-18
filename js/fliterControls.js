@@ -110,7 +110,6 @@ class Item {
   }
 
   itsatext(context) {
-    console.log(context.optionalNumberSelector);
     context.optionalNumber.classList.add('hide');
     context.optionalText.classList.remove('hide');
     context.getDefault(context);
