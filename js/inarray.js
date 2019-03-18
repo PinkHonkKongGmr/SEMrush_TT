@@ -36,11 +36,11 @@ function bind(method, context) {
   }
 }
 
-function test() {
+function test(ok) {
   this.forEach(function (elem) {
-    console.log(elem);
+  elem.innerHTML=ok;
   })
 }
-var p = bind(test, hatefulEight);
+var p = bind(test, hatefulEight,'ok');
 
 p();
