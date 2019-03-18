@@ -32,7 +32,7 @@ function bind(method, context) {
 
   return function() {
     var a = args.concat(Array.prototype.slice.call(arguments, 0));
-    return method.apply(context, args);
+    return method.apply(context, a);
   }
 }
 
