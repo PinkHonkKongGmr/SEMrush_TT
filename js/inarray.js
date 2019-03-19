@@ -49,5 +49,4 @@ function test(ok) {
 // обработка массивоподобного объекта методом массива с использованием bind
 var p = bind([].inArray, he, he[3]);
 
-
 console.log(p());
