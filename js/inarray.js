@@ -52,4 +52,4 @@ var fn =function (elem) {
 }
 var p = bind([].forEach, he, fn);
 
-console.log(p());
+p();
