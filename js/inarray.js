@@ -1,5 +1,5 @@
 var hatefulEight = document.querySelectorAll('.example');
-
+var he = document.getElementsByClassName('example');
 function inArray(arr, el) {
   for (let element of arr) {
     if (element == el) {
@@ -17,15 +17,14 @@ Array.prototype.inArray = function(el) {
     if (element == el) {
       return true;
     } else {
-      return function() {
-        return false
-      }
+      console.log(false);
     }
   }
 };
 
 
-// console.log([1, 2, 3].inArray(1));
+
+// console.log([1, 2, 3].inArray(100));
 
 function bind(method, context) {
   var args = [].slice.call(arguments, 2);
@@ -37,10 +36,11 @@ function bind(method, context) {
 }
 
 function test(ok) {
-  this.forEach(function (elem) {
-  elem.innerHTML=ok;
+  this.forEach(function(elem) {
+    elem.innerHTML = ok;
   })
 }
-var p = bind(test, hatefulEight,'ok');
 
-p();
+
+var p = bind([].inArray, he, he[3]);
+console.log(p());
