@@ -1,5 +1,5 @@
 // Переменные для теста bind специально двух типов. querySelectorAll работает с forEach, getElementsByClassName - нет.
-// в идеале хотелось запустить ее через bind но не получилось
+// в идеале хотелось запустить getElementsByClassName.forEach через bind но не получилось
 var hatefulEight = document.querySelectorAll('.example');
 var he = document.getElementsByClassName('example');
 
