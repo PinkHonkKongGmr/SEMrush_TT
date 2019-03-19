@@ -165,12 +165,7 @@ function protocolMaker(filter, protocol) {
       let operation;
       let value;
       for (node of sel.childNodes) {
-        if (node.type == 'select-one') {
-          operation = node.value;
-        }
-        if (node.type == 'text'||node.type == 'number') {
-          value = node.value;
-        }
+        node.type=='select-one'?operation = node.value:value = node.value;
       }
       protocol.push({
         operation: operation,
