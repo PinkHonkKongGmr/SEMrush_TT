@@ -1,5 +1,5 @@
 // Переменные для теста bind специально двух типов. querySelectorAll работает с forEach, getElementsByClassName - нет.
-// в идеале хотелось запустить getElementsByClassName.forEach через bind но не получилось
+
 var hatefulEight = document.querySelectorAll('.example');
 var he = document.getElementsByClassName('example');
 
@@ -46,7 +46,10 @@ function test(ok) {
   })
 }
 
-// обработка массивоподобного объекта методом массива с использованием bind
-var p = bind([].inArray, he, he[3]);
+// обработка массивоподобного объекта методом массива с использованием bind запуск forEach c getElementsByClassName
+var fn =function (elem) {
+  console.log(elem);
+}
+var p = bind([].forEach, [he], fn);
 
 console.log(p());
