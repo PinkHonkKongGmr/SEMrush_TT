@@ -50,6 +50,6 @@ function test(ok) {
 var fn =function (elem) {
   console.log(elem);
 }
-var p = bind([].forEach, [he], fn);
+var p = bind([].forEach, he, fn);
 
 console.log(p());
