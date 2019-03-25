@@ -2,10 +2,21 @@ var add = document.querySelector('.add');
 var filterField = document.querySelector('.filterField');
 var clearFilter = document.querySelector('.clearFilter');
 var apply = document.querySelector('.apply');
-
 var filterProtocol = {
   text: [],
   number: []
+}
+
+function itemFull() {
+  var items = document.querySelectorAll('.item');
+  let full;
+  items.length>9?full=true:full=false;
+  return full;
+}
+
+function filterProtocolClear() {
+  filterProtocol.text = [];
+  filterProtocol.number = [];
 }
 
 class Item {
@@ -148,7 +159,7 @@ function buildTheItem() {
   item.closerControl();
 }
 add.onclick = function() {
-  buildTheItem();
+  itemFull()?alert('максимум 10'):buildTheItem();
 }
 window.onload = function() {
   buildTheItem();
@@ -175,8 +186,8 @@ function protocolMaker(filter, protocol) {
   }
 }
 apply.onclick = function() {
-  filterProtocol.text = [];
-  filterProtocol.number = [];
+
+  filterProtocolClear();
   let optoinalTextContent = document.querySelectorAll('.optionalText');
   protocolMaker(optoinalTextContent, filterProtocol.text)
   let optoinalNumberContent = document.querySelectorAll('.optionalNumber');
