@@ -73,13 +73,6 @@ export default {
         }
       }
     },
-    refresh() {
-      this.startConditionHide();
-      this.items=[];
-      this.addItem();
-      console.log(this.items.length);
-      this.closerToShow();
-    },
     makeProtocol() {
       let filterProtocol = {
         text: [],
@@ -90,6 +83,13 @@ export default {
       let optionalNumberContent = document.querySelectorAll('.optionalNumber');
       this.protocolMaker(optionalNumberContent, filterProtocol.number)
       console.log(filterProtocol);
+    },
+    refresh() {
+      this.startConditionHide();
+      this.items=[];
+      this.addItem();
+      console.log(this.items.length);
+      this.closerToShow();
     }
   },
   components: {
