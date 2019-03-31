@@ -2,7 +2,7 @@
 <div id="conditions">
   <div class='item'>
     <appConditions v-show="startCondition"></appConditions>
-    <i v-show="closerShow&&startCondition" class="fas fa-times" @click="startConditionHide()"></i>
+    <i v-show="closerShow&&startCondition" class="fas fa-times" @click="startConditionRemove()"></i>
   </div>
   <div class="items" v-for="(item, index) in items" :key="item.id">
     <div class='item'>
@@ -52,7 +52,7 @@ export default {
       this.items.splice(index,1);
       this.closerToShow();
     },
-    startConditionHide() {
+    startConditionRemove() {
       if (this.startCondition) {
         this.startCondition=false;
         document.getElementById('conditions').removeChild(document.querySelector('.item'));
@@ -85,10 +85,9 @@ export default {
       console.log(filterProtocol);
     },
     refresh() {
-      this.startConditionHide();
+      this.startConditionRemove();
       this.items=[];
       this.addItem();
-      console.log(this.items.length);
       this.closerToShow();
     }
   },
