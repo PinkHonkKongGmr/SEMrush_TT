@@ -76,7 +76,6 @@ export default {
     refresh() {
       this.startConditionHide();
       this.items=[];
-      this.closerToShow();
       this.addItem();
       console.log(this.items.length);
       this.closerToShow();
