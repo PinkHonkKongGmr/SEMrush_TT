@@ -82,7 +82,6 @@ export default {
       this.protocolMaker(optionalTextContent, filterProtocol.text)
       let optionalNumberContent = document.querySelectorAll('.optionalNumber');
       this.protocolMaker(optionalNumberContent, filterProtocol.number)
-      console.log(filterProtocol);
     },
     refresh() {
       this.startConditionRemove();
