@@ -4,7 +4,7 @@
     <appConditions v-show="startCondition"></appConditions>
     <i v-show="closerShow&&startCondition" class="fas fa-times" @click="startConditionHide()"></i>
   </div>
-  <div class="items" v-for="(item, index) in items" v-if="item.toRender">
+  <div class="items" v-for="(item, index) in items" :key="item.id">
     <div class='item'>
       <appConditions></appConditions>
       <i v-show="closerShow" class="fas fa-times" @click="deleteItem(index)"></i>
@@ -14,7 +14,6 @@
   <button @click="addItem" class='apply'><i class="fas fa-plus"></i>add condition</button>
  <div class='filtercomands'>  <button @click="makeProtocol">Apply</button>
    <button @click="refresh" class="clearFilter">clear filter</button></div>
-
 </div>
 </template>
 
@@ -26,45 +25,42 @@ export default {
     return {
       startCondition: true,
       items: [],
-      closerShow: false,
-      toshow: 1
+      closerShow: false
     }
   },
 
   methods: {
     closerToShow() {
-      this.toshow > 1 ? this.closerShow = true : this.closerShow = false;
+      if (this.startCondition) {
+        this.items.length > 0 ? this.closerShow = true : this.closerShow = false;
+      } else {
+        this.items.length > 1 ? this.closerShow = true : this.closerShow = false;
+      }
     },
     addItem() {
-      if (this.toshow < 10) {
+      if (this.items.length<10) {
         this.items.push({
-          toRender: true
+          toRender: true,
+          id:Math.round(0 - 2000 + Math.random() * 6000)+"e"+Math.round(0 - 20 + Math.random() * 90)
         })
-        this.toshow++;
         this.closerToShow();
       } else {
         alert("slishkom mnogo")
       }
     },
-    minusItem() {
-      this.toshow--;
-      this.closerToShow();
-    },
     deleteItem(index) {
-      this.items[index].toRender = false;
-      this.minusItem();
+      this.items.splice(index,1);
+      this.closerToShow();
     },
     startConditionHide() {
       if (this.startCondition) {
         this.startCondition=false;
         document.getElementById('conditions').removeChild(document.querySelector('.item'));
-        this.minusItem();
       }
     },
     protocolMaker(filter, protocol) {
       for (let sel of filter) {
         if (sel.style.display != "none") {
-          console.log();
           let operation;
           let value;
           for (let node of sel.childNodes) {
@@ -79,12 +75,11 @@ export default {
     },
     refresh() {
       this.startConditionHide();
-      this.toshow = 0;
-      for (let item of this.items) {
-        item.toRender = false;
-      }
-      console.log(this.$options.components);
+      this.items=[];
+      this.closerToShow();
       this.addItem();
+      console.log(this.items.length);
+      this.closerToShow();
     },
     makeProtocol() {
       let filterProtocol = {
@@ -95,7 +90,6 @@ export default {
       this.protocolMaker(optionalTextContent, filterProtocol.text)
       let optionalNumberContent = document.querySelectorAll('.optionalNumber');
       this.protocolMaker(optionalNumberContent, filterProtocol.number)
-
       console.log(filterProtocol);
     }
   },
