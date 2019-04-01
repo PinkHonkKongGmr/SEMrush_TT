@@ -1,9 +1,5 @@
 <template>
 <div id="conditions">
-  <div class='item'>
-    <appConditions v-show="startCondition"></appConditions>
-    <i v-show="closerShow&&startCondition" class="fas fa-times" @click="startConditionRemove()"></i>
-  </div>
   <div class="items" v-for="(item, index) in items" :key="item.id">
     <div class='item'>
       <appConditions></appConditions>
@@ -23,7 +19,6 @@ export default {
   name: 'conditions',
   data() {
     return {
-      startCondition: true,
       items: [],
       closerShow: false
     }
@@ -31,11 +26,7 @@ export default {
 
   methods: {
     closerToShow() {
-      if (this.startCondition) {
-        this.items.length > 0 ? this.closerShow = true : this.closerShow = false;
-      } else {
         this.items.length > 1 ? this.closerShow = true : this.closerShow = false;
-      }
     },
     addItem() {
       if (this.items.length<10) {
@@ -51,12 +42,6 @@ export default {
     deleteItem(index) {
       this.items.splice(index,1);
       this.closerToShow();
-    },
-    startConditionRemove() {
-      if (this.startCondition) {
-        this.startCondition=false;
-        document.getElementById('conditions').removeChild(document.querySelector('.item'));
-      }
     },
     protocolMaker(filter, protocol) {
       for (let sel of filter) {
@@ -81,14 +66,17 @@ export default {
       let optionalTextContent = document.querySelectorAll('.optionalText');
       this.protocolMaker(optionalTextContent, filterProtocol.text)
       let optionalNumberContent = document.querySelectorAll('.optionalNumber');
-      this.protocolMaker(optionalNumberContent, filterProtocol.number)
+      this.protocolMaker(optionalNumberContent, filterProtocol.number);
+      console.log(filterProtocol);
     },
     refresh() {
-      this.startConditionRemove();
       this.items=[];
       this.addItem();
       this.closerToShow();
     }
+  },
+  beforeMount() {
+    this.addItem()
   },
   components: {
     appConditions: Condition
