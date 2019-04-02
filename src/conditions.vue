@@ -49,9 +49,9 @@ export default{
     swap() {
       this.textNumberSwap();
       this.idCollection=[this.optionalTextSelectId,this.optionalNumberSelectId,this.inputTextId,this.inputNumberId];
-      this.defaultCollection=[this.optionalTextDefault,this.optionalNumberDefault,"",""];
+      this.defaultCollection=[this.optionalTextDefault,this.optionalNumberDefault];
       for (let index in this.idCollection) {
-        document.getElementById(this.idCollection[index]).value = this.defaultCollection[index];
+      this.defaultCollection[index]?document.getElementById(this.idCollection[index]).value = this.defaultCollection[index]:document.getElementById(this.idCollection[index]).value = "";
       }
     }
   }
