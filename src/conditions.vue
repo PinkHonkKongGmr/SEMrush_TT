@@ -2,7 +2,7 @@
 
 <template>
   <div class="condition">
-    <div class="fundamental"><select v-bind:id="fundamentalSelectId" v-on:change="swap()" class="commonFields filterSelect">
+    <div class="fundamental"><select v-on:change="swap()" class="commonFields filterSelect">
       <option value="Text field">Text field</option>
       <option value="Number field">Number field</option>
       </select></div>
@@ -27,13 +27,14 @@ export default{
     return{
       textShow:true,
       numberShow:false,
-      fundamentalSelectId:this.getId(),
       optionalTextSelectId:this.getId(),
       optionalNumberSelectId:this.getId(),
       inputTextId:this.getId(),
       inputNumberId:this.getId(),
+      idCollection:[],
       optionalTextDefault:'Containing',
-      optionalNumberDefault:'Equal'
+      optionalNumberDefault:'Equal',
+      defaultCollection:[]
     }
   },
   methods:{
@@ -45,17 +46,13 @@ export default{
       id="idConditions"+Math.round(0 - 2000 + Math.random() * 6000000)+"e"+Math.round(0 - 20 + Math.random() * 900)+"rr"+Math.round(0 - 900000 + Math.random() * 7000);
       return id;
     },
-    swap(){
+    swap() {
       this.textNumberSwap();
-      let fundamental= document.getElementById(this.fundamentalSelectId);
-      let optionalText= document.getElementById(this.optionalTextSelectId);
-      let optionalNumber= document.getElementById(this.optionalNumberSelectId);
-      let inputTextId=document.getElementById(this.inputTextId);
-      let inputNumberId=document.getElementById(this.inputNumberId);
-      optionalText.value=this.optionalTextDefault
-      optionalNumber.value=this.optionalNumberDefault;
-      inputTextId.value='';
-      inputNumberId.value='';
+      this.idCollection=[this.optionalTextSelectId,this.optionalNumberSelectId,this.inputTextId,this.inputNumberId];
+      this.defaultCollection=[this.optionalTextDefault,this.optionalNumberDefault,"",""];
+      for (let index in this.idCollection) {
+        document.getElementById(this.idCollection[index]).value = this.defaultCollection[index];
+      }
     }
   }
 }
